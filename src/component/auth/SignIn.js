@@ -10,10 +10,9 @@ const SignIn = () => {
     const[password,setPassword]=useState("");
     const[validateEmail,setValidateEmail]=useState(true)
     const[validatePassword,setValidatePassword]=useState(true)
+    const navigate=useNavigate();
     const handlesubmit=(e)=>{
       e.preventDefault();
-      console.log(validateEmail)
-      console.log(validatePassword)
       if(!validateEmail&&!validatePassword){
         console.log(password)
         console.log(email)
@@ -31,10 +30,20 @@ const SignIn = () => {
           body: raw,
           redirect: 'follow'
         };
+        let status;
         
         fetch("http://localhost:8082/authenticate", requestOptions)
-          .then(response => response.text())
-          .then(result => console.log(result))
+          .then(response => response)
+          .then(result =>{
+            console.log(result.text());
+            status=result.status;
+            console.log(status)
+            if(status===200){
+              console.log(status)
+              alert('Login successfully.')
+              navigate('/employee/list');
+            }
+          })
           .catch(error => console.log('error', error));
       }
       
