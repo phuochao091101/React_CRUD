@@ -5,14 +5,16 @@ import EmpListing from './EmpListing';
 import EmpCreate from './EmpCreate';
 import EmpDetail from './EmpDetail';
 import EmpEdit from './EmpEdit';
+import SignIn from './component/auth/SignIn';
 
 function App() {
   return (
-    <div className="App">
-      <h1>React JS CRUD Opertations</h1>
+    <div className="container">
+      <h1 className="text-center">Welcome to TMA Employee System</h1>
       <BrowserRouter>
         <Routes>
-          <Route path='/' element={<EmpListing />}></Route>
+        <Route path='/' element={<SignIn />}></Route>
+          <Route path='/employee/list' element={<EmpListing />}></Route>
           <Route path='/employee/create' element={<EmpCreate />}></Route>
 
           <Route path='/employee/detail/:empid' element={<EmpDetail />}></Route>
