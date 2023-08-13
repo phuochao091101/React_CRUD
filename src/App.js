@@ -6,6 +6,7 @@ import EmpCreate from './EmpCreate';
 import EmpDetail from './EmpDetail';
 import EmpEdit from './EmpEdit';
 import SignIn from './component/auth/SignIn';
+import SignUp from './component/auth/SignUp';
 
 function App() {
   return (
@@ -13,7 +14,8 @@ function App() {
       <h1 className="text-center">Welcome to TMA Employee System</h1>
       <BrowserRouter>
         <Routes>
-        <Route path='/' element={<SignIn />}></Route>
+          <Route path='/' element={<SignIn />}></Route>
+          <Route path='/register' element={<SignUp />}></Route>
           <Route path='/employee/list' element={<EmpListing />}></Route>
           <Route path='/employee/create' element={<EmpCreate />}></Route>
 

@@ -45,31 +45,40 @@ const SignIn = () => {
             }
           })
           .catch(error => console.log('error', error));
+      }else{
+        let email=document.getElementById('email');
+        let password=document.getElementById('password');
+        addError(email)
+        addError(password)
       }
       
+    }
+    function addError(e){
+      e.target.classList.remove("is-valid")
+      e.target.classList.add("is-invalid")
+    }
+    function removeError(e){
+      e.target.classList.remove("is-invalid")
+      e.target.classList.add("is-valid")
     }
     function validEmail(e){
       if(validator.isEmail(email)){
         setValidateEmail(false)
-        e.target.classList.remove("is-invalid")
-        e.target.classList.add("is-valid")
+        removeError(e)
 
       }else{
         setValidateEmail(true)
-        e.target.classList.remove("is-valid")
-        e.target.classList.add("is-invalid")
+        addError(e)
       }
     }
     function validPassword(e){
       if(!validator.isEmpty(password)){
         setValidatePassword(false)
-        e.target.classList.remove("is-invalid")
-        e.target.classList.add("is-valid")
+        removeError(e)
 
       }else{
         setValidatePassword(true)
-        e.target.classList.remove("is-valid")
-        e.target.classList.add("is-invalid")
+        addError(e)
       }
     }
     return ( <div>
@@ -78,16 +87,16 @@ const SignIn = () => {
             <form onSubmit={handlesubmit}>
                 <h2 className="text-center mb-4">Login</h2>
                 <div className="form-outline mb-4">
-                  <label className="form-label" for="form2Example1">Email address</label>
-                  <input  required value={email}  onBlur={e=>validEmail(e)} onChange={e=>setEmail(e.target.value)} type="email" id="form2Example1" className="form-control"></input>
+                  <label className="form-label" for="email">Email address</label>
+                  <input  required value={email}  onBlur={e=>validEmail(e)} onChange={e=>setEmail(e.target.value)} type="email" id="email" className="form-control"></input>
                   {validateEmail && <div className="invalid-feedback">
                     Invalid Email
                   </div>}
                 </div>
               
                 <div className="form-outline mb-4">
-                  <label className="form-label" for="form2Example2">Password</label>
-                  <input required value={password}  onBlur={e=>validPassword(e)} onChange={e=>setPassword(e.target.value)} type="password" id="form2Example2" className="form-control"></input>
+                  <label className="form-label" for="password">Password</label>
+                  <input required value={password}  onBlur={e=>validPassword(e)} onChange={e=>setPassword(e.target.value)} type="password" id="password" className="form-control"></input>
                   <div className="invalid-feedback">
                     Invalid Password
                   </div>
@@ -95,7 +104,7 @@ const SignIn = () => {
                 <button type="submit" className="btn btn-primary btn-block mb-4 w-100">Sign in</button>
               
                 <div className="text-center">
-                  <p>Not a member? <a href="#!">Register</a></p>
+                  <p>Not a member? <Link to={'/register'} href="#!">Register</Link></p>
                 </div>
               </form>
         </div>
